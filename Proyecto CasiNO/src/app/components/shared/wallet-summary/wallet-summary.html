@@ -1,0 +1,13 @@
+<div class="casino-glass rounded-4 p-3">
+  <h2 class="h5 text-warning mb-3">Cuenta del jugador</h2>
+  <div class="vstack gap-2">
+    <div class="stat-mini">
+      <small class="text-secondary d-block">Usuario</small>
+      <strong>{{ currentUser() ?? 'Invitado' }}</strong>
+    </div>
+    <div class="stat-mini">
+      <small class="text-secondary d-block">Saldo ficticio</small>
+      <strong class="fs-5 text-warning">{{ balance() }} fichas</strong>
+    </div>
+  </div>
+</div>

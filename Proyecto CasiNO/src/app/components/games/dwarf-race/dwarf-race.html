@@ -1,0 +1,40 @@
+<div class="casino-glass rounded-4 p-3 p-lg-4">
+  <div class="row g-3">
+    <div class="col-12 col-md-4">
+      <label class="form-label">Apuesta</label>
+      <input class="form-control" type="number" [(ngModel)]="betAmount" min="10" step="10" [disabled]="racing" />
+    </div>
+    <div class="col-12 col-md-4">
+      <label class="form-label">Elige enano</label>
+      <select class="form-select" [(ngModel)]="selectedId" [disabled]="racing">
+        @for (option of options; track option.id) {
+          <option [value]="option.id">{{ option.name }} (x{{ option.multiplier }})</option>
+        }
+      </select>
+    </div>
+    <div class="col-12 col-md-4 d-grid">
+      <button class="btn btn-casino" (click)="runRace()" [disabled]="racing">
+        {{ racing ? 'Corriendo...' : 'Iniciar carrera' }}
+      </button>
+    </div>
+  </div>
+
+  <div class="mt-4 vstack gap-2">
+    @for (dwarf of options; track dwarf.id) {
+      <div class="track-card">
+        <div class="d-flex justify-content-between small mb-1">
+          <span class="fw-semibold">{{ dwarf.name }}</span>
+          <span>{{ progress[dwarf.id] }}%</span>
+        </div>
+        <div class="progress" role="progressbar" [attr.aria-valuenow]="progress[dwarf.id]" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar progress-bar-striped progress-bar-animated" [style.width.%]="progress[dwarf.id]"></div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="alert casino-alert py-2 mt-3 mb-0">{{ statusMessage }}</div>
+  @if (winnerName) {
+    <p class="text-warning fw-semibold mt-2 mb-0">Ganador: {{ winnerName }}</p>
+  }
+</div>

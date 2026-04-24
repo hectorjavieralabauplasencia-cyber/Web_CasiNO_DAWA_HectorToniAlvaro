@@ -1,0 +1,25 @@
+<div class="casino-glass rounded-4 p-3 h-100">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="h5 mb-0">Historial de movimientos</h3>
+    <button class="btn btn-sm btn-outline-light" (click)="clear()">Limpiar</button>
+  </div>
+
+  @if (entries().length === 0) {
+    <p class="text-secondary mb-0">Sin movimientos todavia.</p>
+  } @else {
+    <div class="vstack gap-2 movement-scroll">
+      @for (entry of entries(); track entry.id) {
+        <div class="track-card">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="small fw-semibold">{{ entry.game }}</span>
+            <span class="small" [class]="amountClass(entry.amount)">
+              {{ entry.amount > 0 ? '+' : '' }}{{ entry.amount }}
+            </span>
+          </div>
+          <div class="small text-secondary">{{ entry.description }}</div>
+          <div class="small text-secondary">{{ entry.createdAt | date: 'HH:mm:ss' }}</div>
+        </div>
+      }
+    </div>
+  }
+</div>

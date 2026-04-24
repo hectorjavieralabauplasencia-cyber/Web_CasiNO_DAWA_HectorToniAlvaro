@@ -1,0 +1,86 @@
+<div class="row g-3">
+  <div class="col-12 col-lg-5">
+    <div class="casino-glass rounded-4 p-3 h-100">
+      <h3 class="h5 mb-3">Apuesta de ruleta</h3>
+
+      <div class="mb-3">
+        <label class="form-label">Cantidad (fichas)</label>
+        <input class="form-control" type="number" [(ngModel)]="betAmount" min="10" step="10" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Tipo</label>
+        <select class="form-select" [(ngModel)]="betType">
+          <option value="color">Color (x2)</option>
+          <option value="number">Numero exacto (x36)</option>
+        </select>
+      </div>
+
+      @if (betType === 'color') {
+        <div class="mb-3">
+          <label class="form-label">Color objetivo</label>
+          <select class="form-select" [(ngModel)]="selectedColor">
+            <option value="red">Rojo</option>
+            <option value="black">Negro</option>
+          </select>
+        </div>
+      } @else {
+        <div class="mb-3">
+          <label class="form-label">Numero (0-36)</label>
+          <input class="form-control" type="number" [(ngModel)]="selectedNumber" min="0" max="36" />
+        </div>
+      }
+
+      <button class="btn btn-casino w-100" (click)="spin()">Girar ruleta</button>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-7">
+    <div class="casino-glass rounded-4 p-3 h-100">
+      <div class="row g-3 mb-3">
+        <div class="col-12 col-md-4">
+          <div class="stat-mini text-center">
+            <small class="text-secondary d-block">Ultimo numero</small>
+            <strong class="fs-4">{{ lastSpin ? lastSpin.spin : '--' }}</strong>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="stat-mini text-center">
+            <small class="text-secondary d-block">Color</small>
+            <strong class="text-capitalize">{{ lastSpin ? lastSpin.color : '--' }}</strong>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="stat-mini text-center">
+            <small class="text-secondary d-block">Resultado</small>
+            <strong>{{ lastSpin ? lastSpin.outcome : '--' }}</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert casino-alert py-2">{{ statusMessage }}</div>
+
+      <h4 class="h6 text-secondary mt-3">Historial de tiradas</h4>
+      <div class="table-responsive">
+        <table class="table table-sm table-striped table-casino align-middle mb-0">
+          <thead>
+            <tr>
+              <th>Numero</th>
+              <th>Color</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (round of rounds; track $index) {
+              <tr>
+                <td>{{ round.spin }}</td>
+                <td class="text-capitalize">{{ round.color }}</td>
+                <td>{{ round.outcome }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

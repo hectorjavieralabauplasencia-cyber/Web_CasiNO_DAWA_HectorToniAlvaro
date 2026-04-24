@@ -1,0 +1,25 @@
+<div class="casino-glass rounded-4 p-3 p-lg-4">
+  <div class="row g-3 align-items-end mb-3">
+    <div class="col-12 col-md-4">
+      <label class="form-label">Apuesta</label>
+      <input class="form-control" type="number" [(ngModel)]="betAmount" min="10" step="10" />
+    </div>
+    <div class="col-12 col-md-4 d-grid">
+      <button class="btn btn-casino" (click)="dealHand()">Repartir mano</button>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="stat-mini text-center">
+        <small class="text-secondary d-block">Evaluacion</small>
+        <strong class="text-warning">{{ handLabel }}</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex gap-2 flex-wrap mb-3">
+    @for (card of hand; track $index) {
+      <div class="card-face">{{ card.rank }}{{ card.suit }}</div>
+    }
+  </div>
+
+  <div class="alert casino-alert py-2 mb-0">{{ statusMessage }}</div>
+</div>

@@ -1,0 +1,89 @@
+<section class="min-vh-100 d-flex align-items-center casino-bg py-4">
+  <div class="container casino-content">
+    <div class="row justify-content-center">
+      <div class="col-12 col-xl-10">
+        <div class="casino-glass rounded-4 p-4 p-lg-5">
+          <div class="row g-4 align-items-start">
+            <div class="col-12 col-lg-4">
+              <h1 class="h2 brand-title mb-3">Registro CasiNO</h1>
+              <p class="text-light mb-3">
+                Abre tu cuenta para jugar en modo ficticio con saldo inicial de fichas.
+              </p>
+
+              <div class="alert alert-danger fw-bold mb-3">
+                Prohibido para menores de 18 anos (+18)
+              </div>
+
+              <div class="alert alert-warning mb-0">
+                Mensaje de juego responsable: establece limites personales y juega solo por diversion.
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-8">
+              <div class="row g-2 mb-3">
+                <div class="col-sm-4">
+                  <div class="stat-mini text-center">
+                    <small class="text-secondary d-block">Requisito</small>
+                    <strong>Edad +18</strong>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="stat-mini text-center">
+                    <small class="text-secondary d-block">Saldo inicial</small>
+                    <strong class="text-warning">5000 fichas</strong>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="stat-mini text-center">
+                    <small class="text-secondary d-block">Moneda</small>
+                    <strong>Virtual</strong>
+                  </div>
+                </div>
+              </div>
+
+              <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+                <div class="row g-3">
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="username">Usuario</label>
+                    <input id="username" class="form-control" type="text" formControlName="username" placeholder="Alias" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="email">Email</label>
+                    <input id="email" class="form-control" type="email" formControlName="email" placeholder="correo@ejemplo.com" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="password">Contrasena</label>
+                    <input id="password" class="form-control" type="password" formControlName="password" placeholder="Minimo 6 caracteres" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="confirmPassword">Confirmar contrasena</label>
+                    <input id="confirmPassword" class="form-control" type="password" formControlName="confirmPassword" placeholder="Repite la clave" />
+                  </div>
+                </div>
+
+                @if (form.hasError('passwordsMismatch') && form.touched) {
+                  <div class="alert alert-danger py-2 mt-3 mb-0">Las contrasenas no coinciden.</div>
+                }
+                @if (errorMessage) {
+                  <div class="alert alert-danger py-2 mt-3 mb-0">{{ errorMessage }}</div>
+                }
+                @if (successMessage) {
+                  <div class="alert alert-success py-2 mt-3 mb-0">{{ successMessage }}</div>
+                }
+
+                <div class="row g-2 mt-3">
+                  <div class="col-sm-6 d-grid">
+                    <button class="btn btn-casino" type="submit">Crear cuenta</button>
+                  </div>
+                  <div class="col-sm-6 d-grid">
+                    <a routerLink="/" class="btn btn-neon">Volver al login</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

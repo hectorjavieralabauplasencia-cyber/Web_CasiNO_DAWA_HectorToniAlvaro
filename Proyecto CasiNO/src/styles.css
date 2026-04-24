@@ -1,0 +1,212 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+:root {
+  --casino-bg: #07080f;
+  --casino-bg-soft: #101525;
+  --casino-panel: rgba(17, 21, 36, 0.84);
+  --casino-gold: #f6c04a;
+  --casino-red: #da2f56;
+  --casino-green: #16a673;
+  --casino-purple: #6531b8;
+  --casino-neon: #42d7ff;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background:
+    radial-gradient(80rem 36rem at 10% -10%, rgba(101, 49, 184, 0.35), transparent 60%),
+    radial-gradient(60rem 26rem at 90% -10%, rgba(218, 47, 86, 0.28), transparent 60%),
+    linear-gradient(180deg, #0f1120 0%, #07080f 55%, #050507 100%);
+}
+
+.casino-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.casino-bg::before,
+.casino-bg::after {
+  content: '';
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(40px);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.casino-bg::before {
+  width: 18rem;
+  height: 18rem;
+  background: rgba(246, 192, 74, 0.35);
+  top: -5rem;
+  left: -3rem;
+}
+
+.casino-bg::after {
+  width: 15rem;
+  height: 15rem;
+  background: rgba(66, 215, 255, 0.25);
+  right: -3rem;
+  bottom: -6rem;
+}
+
+.casino-content {
+  position: relative;
+  z-index: 1;
+}
+
+.casino-glass {
+  background: var(--casino-panel);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.35);
+}
+
+.casino-highlight {
+  border: 1px solid rgba(246, 192, 74, 0.45);
+  box-shadow: 0 0 0.7rem rgba(246, 192, 74, 0.25);
+}
+
+.brand-title {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--casino-gold);
+  text-shadow: 0 0 0.6rem rgba(246, 192, 74, 0.35);
+}
+
+.neon-text {
+  color: var(--casino-neon);
+  text-shadow: 0 0 0.5rem rgba(66, 215, 255, 0.45);
+}
+
+.form-control,
+.form-select {
+  background-color: rgba(7, 10, 18, 0.88);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #f8f9fa;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: rgba(246, 192, 74, 0.8);
+  box-shadow: 0 0 0 0.25rem rgba(246, 192, 74, 0.2);
+  background-color: rgba(7, 10, 18, 0.92);
+  color: #fff;
+}
+
+.form-select option {
+  background: #111523;
+  color: #fff;
+}
+
+.btn-casino {
+  --bs-btn-color: #1f1201;
+  --bs-btn-bg: var(--casino-gold);
+  --bs-btn-border-color: var(--casino-gold);
+  --bs-btn-hover-color: #1f1201;
+  --bs-btn-hover-bg: #ffd270;
+  --bs-btn-hover-border-color: #ffd270;
+  --bs-btn-active-color: #1f1201;
+  --bs-btn-active-bg: #f7b933;
+  --bs-btn-active-border-color: #f7b933;
+  font-weight: 700;
+}
+
+.btn-neon {
+  --bs-btn-color: #dbf8ff;
+  --bs-btn-bg: rgba(66, 215, 255, 0.2);
+  --bs-btn-border-color: rgba(66, 215, 255, 0.55);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: rgba(66, 215, 255, 0.34);
+  --bs-btn-hover-border-color: rgba(66, 215, 255, 0.8);
+}
+
+.nav-casino .btn {
+  border-radius: 0.75rem;
+  font-weight: 600;
+}
+
+.score-chip {
+  background: rgba(22, 166, 115, 0.2);
+  border: 1px solid rgba(22, 166, 115, 0.5);
+  color: #abf0d3;
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  font-weight: 600;
+}
+
+.slot-reel {
+  background: radial-gradient(circle at 35% 15%, #22293f 0%, #111726 55%, #090c14 100%);
+  border: 1px solid rgba(246, 192, 74, 0.45);
+  border-radius: 1rem;
+  min-height: 7rem;
+  display: grid;
+  place-items: center;
+  color: var(--casino-gold);
+  text-shadow: 0 0 0.6rem rgba(246, 192, 74, 0.35);
+}
+
+.track-card {
+  background: rgba(9, 12, 20, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.8rem;
+  padding: 0.55rem 0.7rem;
+}
+
+.casino-alert {
+  background: rgba(16, 26, 46, 0.76);
+  color: #d5e9ff;
+  border: 1px solid rgba(66, 215, 255, 0.35);
+}
+
+.movement-scroll {
+  max-height: 65vh;
+  overflow: auto;
+  padding-right: 0.25rem;
+}
+
+.table-casino {
+  --bs-table-bg: transparent;
+  --bs-table-color: #ebedf4;
+  --bs-table-striped-bg: rgba(255, 255, 255, 0.04);
+}
+
+.stat-mini {
+  border-radius: 0.8rem;
+  background: rgba(7, 10, 18, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.65rem 0.8rem;
+}
+
+.progress {
+  height: 0.72rem;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, #da2f56 0%, #f6c04a 55%, #16a673 100%);
+}
+
+.card-face {
+  border-radius: 0.75rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid rgba(246, 192, 74, 0.45);
+  background: rgba(9, 12, 20, 0.82);
+  color: #f6c04a;
+  font-weight: 700;
+  min-width: 3rem;
+  text-align: center;
+}
+
+@media (max-width: 991.98px) {
+  .movement-scroll {
+    max-height: 20rem;
+  }
+}
