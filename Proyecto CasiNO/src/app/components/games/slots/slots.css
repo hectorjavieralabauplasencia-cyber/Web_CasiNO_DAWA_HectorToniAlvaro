@@ -1,0 +1,22 @@
+.slot-api-card {
+  min-height: 4.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.8rem;
+  background: rgba(7, 10, 18, 0.7);
+  color: #f8f9fa;
+  padding: 0.7rem 0.85rem;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.slot-api-card:hover,
+.slot-api-card.active {
+  border-color: rgba(246, 192, 74, 0.75);
+  background: rgba(246, 192, 74, 0.12);
+}
+
+.slot-api-card:hover {
+  transform: translateY(-1px);
+}

@@ -1,4 +1,19 @@
 <div class="casino-glass rounded-4 p-3 p-lg-4">
+  <div class="api-panel mb-3">
+    <div class="d-flex flex-column flex-lg-row justify-content-between gap-2">
+      <div>
+        <div class="text-uppercase small neon-text fw-bold">Slot.com API</div>
+        <div class="fw-semibold">{{ selectedSlot?.title }}</div>
+        <div class="text-secondary small">
+          {{ selectedSlot?.theme }} · {{ selectedSlot?.reels }} rodillos · {{ selectedSlot?.paylines }}
+        </div>
+      </div>
+      <a class="btn btn-neon align-self-lg-center" [href]="selectedSlot?.url" target="_blank" rel="noopener">
+        Ver catalogo
+      </a>
+    </div>
+  </div>
+
   <div class="row g-3 align-items-end">
     <div class="col-12 col-md-4">
       <label class="form-label">Apuesta</label>
@@ -21,4 +36,20 @@
   </div>
 
   <div class="alert casino-alert py-2 mb-0">{{ statusMessage }}</div>
+
+  <div class="row g-2 mt-3">
+    @for (slot of slotComGames; track slot.title) {
+      <div class="col-12 col-md-6">
+        <button
+          class="slot-api-card w-100 text-start"
+          [class.active]="selectedSlot?.title === slot.title"
+          (click)="selectSlot(slot)"
+          type="button"
+        >
+          <span class="fw-semibold d-block">{{ slot.title }}</span>
+          <span class="small text-secondary">{{ slot.theme }} · {{ slot.reels }} rodillos</span>
+        </button>
+      </div>
+    }
+  </div>
 </div>
