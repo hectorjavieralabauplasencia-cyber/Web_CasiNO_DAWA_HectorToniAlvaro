@@ -1,4 +1,27 @@
-# CasiNO - Migracion Angular 21 + Estructura Escalable
+# ğŸ° CasiNO - Migracion Angular 21 + Estructura Escalable
+
+## âš¡ INICIO RÃPIDO
+
+### OpciÃ³n 1: Script AutomÃ¡tico (RECOMENDADO)
+```bash
+# Windows - PowerShell
+.\install.ps1
+
+# Windows - CMD
+.\install.bat
+```
+
+### OpciÃ³n 2: InstalaciÃ³n Manual
+```bash
+npm install
+npm start
+```
+
+Luego abre `http://localhost:4200` en tu navegador.
+
+---
+
+## ğŸ“‹ CaracterÃ­sticas del Proyecto
 
 Esta guia deja el proyecto listo con:
 - Angular 21 (standalone)
@@ -13,15 +36,15 @@ casi-no/
 +-- angular.json
 +-- package.json
 +-- src/
-¦   +-- main.ts
-¦   +-- index.html
-¦   +-- styles.css
-¦   +-- app/
-¦       +-- app.component.ts
-¦       +-- app.component.html
-¦       +-- app.component.scss
-¦       +-- app.config.ts
-¦       +-- app.routes.ts
+ï¿½   +-- main.ts
+ï¿½   +-- index.html
+ï¿½   +-- styles.css
+ï¿½   +-- app/
+ï¿½       +-- app.component.ts
+ï¿½       +-- app.component.html
+ï¿½       +-- app.component.scss
+ï¿½       +-- app.config.ts
+ï¿½       +-- app.routes.ts
 +-- public/
 ```
 
@@ -63,22 +86,22 @@ npm install @ng-bootstrap/ng-bootstrap
 src/
 +-- app/
     +-- core/
-    ¦   +-- services/
-    ¦   +-- guards/
-    ¦   +-- interceptors/
+    ï¿½   +-- services/
+    ï¿½   +-- guards/
+    ï¿½   +-- interceptors/
     +-- shared/
-    ¦   +-- components/
-    ¦   +-- directives/
-    ¦   +-- pipes/
+    ï¿½   +-- components/
+    ï¿½   +-- directives/
+    ï¿½   +-- pipes/
     +-- features/
-    ¦   +-- casino/
-    ¦   ¦   +-- components/
-    ¦   ¦   +-- casino.routes.ts
-    ¦   +-- users/
+    ï¿½   +-- casino/
+    ï¿½   ï¿½   +-- components/
+    ï¿½   ï¿½   +-- casino.routes.ts
+    ï¿½   +-- users/
     +-- pages/
-    ¦   +-- home/
-    ¦   +-- login/
-    ¦   +-- register/
+    ï¿½   +-- home/
+    ï¿½   +-- login/
+    ï¿½   +-- register/
     +-- app.ts
     +-- app.config.ts
     +-- app.routes.ts
@@ -90,13 +113,13 @@ src/
 projects/
 +-- casi-no/
     +-- src/
-    ¦   +-- app/
-    ¦       +-- core/
-    ¦       +-- shared/
-    ¦       +-- features/
-    ¦       +-- pages/
-    ¦       +-- app.component.ts
-    ¦       +-- app.routes.ts
+    ï¿½   +-- app/
+    ï¿½       +-- core/
+    ï¿½       +-- shared/
+    ï¿½       +-- features/
+    ï¿½       +-- pages/
+    ï¿½       +-- app.component.ts
+    ï¿½       +-- app.routes.ts
     +-- project.json (si usas estructura Nx/standalone workspace)
     +-- ...
 ```
