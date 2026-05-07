@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BettingService } from '../../../services/betting.service';
 import { GameLogicService } from '../../../services/game-logic.service';
-import { SlotComApiService, type SlotComGame } from '../../../services/slot-com-api.service';
+import { PlaypagerApiService, type PlaypagerGame } from '../../../services/playpager-api.service';
 
 @Component({
   selector: 'app-slots',
@@ -14,21 +14,21 @@ export class Slots {
   betAmount = 100;
   reels = ['7', '7', '7'];
   statusMessage = 'Haz girar los rodillos y prueba suerte.';
-  slotComGames: SlotComGame[] = [];
-  selectedSlot?: SlotComGame;
+  playpagerGames: PlaypagerGame[] = [];
+  selectedGame?: PlaypagerGame;
 
   constructor(
     private readonly bettingService: BettingService,
     private readonly gameLogic: GameLogicService,
-    private readonly slotComApi: SlotComApiService,
+    private readonly playpagerApi: PlaypagerApiService,
   ) {
-    this.slotComGames = this.slotComApi.getFeaturedSlots();
-    this.selectedSlot = this.slotComApi.getRandomSlot();
+    this.playpagerGames = this.playpagerApi.getCasinoGames();
+    this.selectedGame = this.playpagerApi.getFeaturedSlot();
   }
 
-  selectSlot(slot: SlotComGame): void {
-    this.selectedSlot = slot;
-    this.statusMessage = `Slot.com seleccionado: ${slot.title}.`;
+  selectGame(game: PlaypagerGame): void {
+    this.selectedGame = game;
+    this.statusMessage = `Playpager seleccionado: ${game.title}.`;
   }
 
   spin(): void {
@@ -56,8 +56,8 @@ export class Slots {
     );
 
     this.statusMessage = win
-      ? `Premio! ${this.selectedSlot?.title ?? 'Slot'} paga combinacion x${multiplier}.`
-      : `No hubo premio en ${this.selectedSlot?.title ?? 'este giro'}.`;
+      ? `Premio! ${this.selectedGame?.title ?? 'Slot'} paga combinacion x${multiplier}.`
+      : `No hubo premio en ${this.selectedGame?.title ?? 'este giro'}.`;
   }
 }
 

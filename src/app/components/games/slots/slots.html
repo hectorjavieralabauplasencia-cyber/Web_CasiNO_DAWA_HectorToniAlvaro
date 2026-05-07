@@ -2,14 +2,14 @@
   <div class="api-panel mb-3">
     <div class="d-flex flex-column flex-lg-row justify-content-between gap-2">
       <div>
-        <div class="text-uppercase small neon-text fw-bold">Slot.com API</div>
-        <div class="fw-semibold">{{ selectedSlot?.title }}</div>
+        <div class="text-uppercase small neon-text fw-bold">Playpager API</div>
+        <div class="fw-semibold">{{ selectedGame?.title }}</div>
         <div class="text-secondary small">
-          {{ selectedSlot?.theme }} - {{ selectedSlot?.reels }} rodillos - {{ selectedSlot?.paylines }}
+          {{ selectedGame?.category }} - {{ selectedGame?.mode }}
         </div>
       </div>
-      <a class="btn btn-neon align-self-lg-center" [href]="selectedSlot?.url" target="_blank" rel="noopener">
-        Ver catalogo
+      <a class="btn btn-neon align-self-lg-center" [href]="selectedGame?.url" target="_blank" rel="noopener">
+        Abrir Playpager
       </a>
     </div>
   </div>
@@ -38,16 +38,16 @@
   <div class="alert casino-alert py-2 mb-0">{{ statusMessage }}</div>
 
   <div class="row g-2 mt-3">
-    @for (slot of slotComGames; track slot.title) {
+    @for (game of playpagerGames; track game.title) {
       <div class="col-12 col-md-6">
         <button
           class="slot-api-card w-100 text-start"
-          [class.active]="selectedSlot?.title === slot.title"
-          (click)="selectSlot(slot)"
+          [class.active]="selectedGame?.title === game.title"
+          (click)="selectGame(game)"
           type="button"
         >
-          <span class="fw-semibold d-block">{{ slot.title }}</span>
-          <span class="small text-secondary">{{ slot.theme }} - {{ slot.reels }} rodillos</span>
+          <span class="fw-semibold d-block">{{ game.title }}</span>
+          <span class="small text-secondary">{{ game.category }} - {{ game.mode }}</span>
         </button>
       </div>
     }
