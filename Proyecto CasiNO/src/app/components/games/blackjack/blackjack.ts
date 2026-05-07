@@ -11,6 +11,8 @@ import { GameLogicService } from '../../../services/game-logic.service';
   styleUrl: './blackjack.css',
 })
 export class Blackjack {
+  readonly pokeristApiUrl = 'https://www.blackjackist.com/';
+
   betAmount = 100;
   deck: PlayingCard[] = [];
   playerCards: PlayingCard[] = [];

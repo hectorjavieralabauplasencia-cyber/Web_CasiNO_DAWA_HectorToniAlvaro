@@ -183,6 +183,13 @@ body {
   padding: 0.65rem 0.8rem;
 }
 
+.api-panel {
+  border-radius: 0.8rem;
+  background: rgba(7, 10, 18, 0.72);
+  border: 1px solid rgba(66, 215, 255, 0.35);
+  padding: 0.75rem 0.9rem;
+}
+
 .progress {
   height: 0.72rem;
   background: rgba(255, 255, 255, 0.15);

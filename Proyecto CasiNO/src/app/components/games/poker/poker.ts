@@ -11,6 +11,8 @@ import { GameLogicService } from '../../../services/game-logic.service';
   styleUrl: './poker.css',
 })
 export class Poker {
+  readonly pokeristApiUrl = 'https://www.pokerist.com/';
+
   betAmount = 100;
   hand: PlayingCard[] = [];
   handLabel = 'Sin mano';
