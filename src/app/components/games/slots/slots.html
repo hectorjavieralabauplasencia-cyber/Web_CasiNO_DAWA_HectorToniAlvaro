@@ -5,7 +5,7 @@
         <div class="text-uppercase small neon-text fw-bold">Slot.com API</div>
         <div class="fw-semibold">{{ selectedSlot?.title }}</div>
         <div class="text-secondary small">
-          {{ selectedSlot?.theme }} · {{ selectedSlot?.reels }} rodillos · {{ selectedSlot?.paylines }}
+          {{ selectedSlot?.theme }} - {{ selectedSlot?.reels }} rodillos - {{ selectedSlot?.paylines }}
         </div>
       </div>
       <a class="btn btn-neon align-self-lg-center" [href]="selectedSlot?.url" target="_blank" rel="noopener">
@@ -47,7 +47,7 @@
           type="button"
         >
           <span class="fw-semibold d-block">{{ slot.title }}</span>
-          <span class="small text-secondary">{{ slot.theme }} · {{ slot.reels }} rodillos</span>
+          <span class="small text-secondary">{{ slot.theme }} - {{ slot.reels }} rodillos</span>
         </button>
       </div>
     }
