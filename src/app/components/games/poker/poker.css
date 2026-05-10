@@ -1,0 +1,58 @@
+.poker-table {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(139, 69, 19, 0.1));
+  border: 2px solid var(--casino-gold);
+  min-height: 300px;
+}
+
+.poker-card {
+  width: 70px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #fff, #f0f0f0);
+  border: 2px solid var(--casino-gold);
+  border-radius: 4px;
+  font-weight: bold;
+  color: var(--casino-dark);
+  font-size: 14px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.poker-card-hidden {
+  background: linear-gradient(135deg, var(--casino-gold), var(--casino-red));
+  color: white;
+  font-weight: bold;
+}
+
+.poker-card-player {
+  border-color: var(--casino-neon);
+  box-shadow: 0 0 10px var(--casino-neon), inset 0 0 5px rgba(0, 255, 200, 0.3);
+}
+
+.poker-player {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.poker-player:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.stat-mini {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+@media (max-width: 768px) {
+  .poker-card {
+    width: 50px;
+    height: 75px;
+    font-size: 12px;
+  }
+}

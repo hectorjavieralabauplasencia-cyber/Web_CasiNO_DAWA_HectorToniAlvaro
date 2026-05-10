@@ -14,6 +14,7 @@ type GameId = 'roulette' | 'slots' | 'dwarf-race' | 'blackjack' | 'poker';
 
 @Component({
   selector: 'app-lobby',
+  standalone: true,
   imports: [
     WalletSummary,
     MovementLog,
@@ -24,7 +25,7 @@ type GameId = 'roulette' | 'slots' | 'dwarf-race' | 'blackjack' | 'poker';
     Poker,
   ],
   templateUrl: './lobby.html',
-  styleUrl: './lobby.css',
+  styleUrls: ['./lobby.css'],
 })
 export class Lobby {
   private readonly authService = inject(AuthService);
@@ -45,6 +46,8 @@ export class Lobby {
         return 'Blackjack';
       case 'poker':
         return 'Poker';
+      default:
+        return 'Ruleta';
     }
   });
 

@@ -12,9 +12,10 @@ interface DwarfOption {
 
 @Component({
   selector: 'app-dwarf-race',
+  standalone: true,
   imports: [FormsModule],
   templateUrl: './dwarf-race.html',
-  styleUrl: './dwarf-race.css',
+  styleUrls: ['./dwarf-race.css'],
 })
 export class DwarfRace implements OnDestroy {
   readonly options: DwarfOption[] = [

@@ -4,9 +4,10 @@ import { HistoryService } from '../../services/history.service';
 
 @Component({
   selector: 'app-movement-log',
+  standalone: true,
   imports: [DatePipe],
   templateUrl: './movement-log.html',
-  styleUrl: './movement-log.css',
+  styleUrls: ['./movement-log.css'],
 })
 export class MovementLog {
   readonly entries = computed(() => this.historyService.movements().slice(0, 12));

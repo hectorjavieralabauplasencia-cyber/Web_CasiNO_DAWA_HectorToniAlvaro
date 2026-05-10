@@ -1,45 +1,129 @@
-<div class="casino-glass rounded-4 p-3 p-lg-4">
-  <div class="api-panel d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-3">
-    <div>
-      <small class="text-secondary d-block">API Pokerist</small>
-      <strong>Blackjackist 3D</strong>
-      <p class="mb-0 text-secondary">Accede al blackjack oficial conectado al ecosistema Pokerist.</p>
-    </div>
-    <a class="btn btn-neon" href="https://www.blackjackist.com/" target="_blank" rel="noopener noreferrer">
-      Abrir API
-    </a>
-  </div>
-
-  <div class="row g-3 mb-3 align-items-end">
-    <div class="col-12 col-md-4">
-      <label class="form-label">Apuesta</label>
-      <input class="form-control" type="number" [(ngModel)]="betAmount" min="10" step="10" [disabled]="roundActive" />
-    </div>
-    <div class="col-12 col-md-8 d-flex flex-wrap gap-2">
-      <button class="btn btn-casino" (click)="deal()" [disabled]="roundActive">Repartir</button>
-      <button class="btn btn-outline-light" (click)="hit()" [disabled]="!roundActive">Pedir carta</button>
-      <button class="btn btn-neon" (click)="stand()" [disabled]="!roundActive">Plantarse</button>
+<div class="row g-3">
+  <div class="col-12">
+    <div class="casino-glass rounded-4 p-3 p-lg-4">
+      <h3 class="h5 mb-2">Blackjack - 21</h3>
+      <p class="text-secondary mb-0">{{ statusMessage() }}</p>
     </div>
   </div>
 
-  <div class="row g-3">
-    <div class="col-12 col-md-6">
-      <h3 class="h6 text-secondary">Jugador ({{ playerScore }})</h3>
-      <div class="d-flex gap-2 flex-wrap">
-        @for (card of playerCards; track $index) {
-          <div class="card-face">{{ card.rank }}{{ card.suit }}</div>
-        }
-      </div>
-    </div>
-    <div class="col-12 col-md-6">
-      <h3 class="h6 text-secondary">Banca ({{ dealerScore }})</h3>
-      <div class="d-flex gap-2 flex-wrap">
-        @for (card of dealerCards; track $index) {
-          <div class="card-face">{{ card.rank }}{{ card.suit }}</div>
-        }
+  @if (!roundActive()) {
+  <div class="col-12">
+    <div class="casino-glass rounded-4 p-3 p-lg-4">
+      <div class="row g-3 align-items-end">
+        <div class="col-12 col-md-4">
+          <label class="form-label">Apuesta</label>
+          <input
+            class="form-control"
+            type="number"
+            [ngModel]="betAmount()"
+            (ngModelChange)="betAmount.set($event)"
+            min="10"
+            step="10"
+          />
+        </div>
+        <div class="col-12 col-md-8 d-grid">
+          <button class="btn btn-casino btn-lg" (click)="deal()">
+            Repartir
+          </button>
+        </div>
       </div>
     </div>
   </div>
+  } @else {
+  <!-- Mesa de Blackjack -->
+  <div class="col-12">
+    <div class="casino-glass rounded-4 p-4 blackjack-table">
+      <div class="row g-4">
+        <!-- Mano del Dealer -->
+        <div class="col-12">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h6 class="text-secondary mb-0">Banca</h6>
+            <span class="badge bg-warning text-dark">{{ dealerVisibleScore }}</span>
+          </div>
+          <div class="d-flex gap-2 flex-wrap">
+            @for (card of dealerCards(); track $index) {
+            <div
+              [class]="'blackjack-card ' + (dealerCardHidden() && $index === dealerCards().length - 1 ? 'card-hidden' : '')"
+            >
+              @if (dealerCardHidden() && $index === dealerCards().length - 1) {
+              <span class="text-white">?</span>
+              } @else {
+              <span>{{ card.rank }}<span class="suit">{{ card.suit }}</span></span>
+              }
+            </div>
+            }
+          </div>
+        </div>
 
-  <div class="alert casino-alert py-2 mt-3 mb-0">{{ statusMessage }}</div>
+        <!-- Separador -->
+        <div class="col-12">
+          <hr class="border-secondary" />
+        </div>
+
+        <!-- Mano del Jugador -->
+        <div class="col-12">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h6 class="text-secondary mb-0">Tu mano</h6>
+            <span
+              [class]="'badge ' + (playerScore > 21 ? 'bg-danger' : 'bg-success')"
+            >
+              {{ playerScore }}
+            </span>
+          </div>
+          <div class="d-flex gap-2 flex-wrap">
+            @for (card of playerCards(); track $index) {
+            <div class="blackjack-card">
+              {{ card.rank }}<span class="suit">{{ card.suit }}</span>
+            </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botones de Acción -->
+  <div class="col-12">
+    <div class="d-grid gap-2 d-sm-flex gap-sm-2">
+      <button
+        class="btn btn-primary flex-grow-1"
+        (click)="hit()"
+        [disabled]="!canHit()"
+      >
+        Pedir carta
+      </button>
+      <button
+        class="btn btn-neon flex-grow-1"
+        (click)="stand()"
+        [disabled]="!canStand()"
+      >
+        Plantarse
+      </button>
+      <button
+        class="btn btn-warning flex-grow-1"
+        (click)="doubleDown()"
+        [disabled]="!canDoubleDown()"
+      >
+        Double Down
+      </button>
+      <button
+        class="btn btn-info flex-grow-1"
+        (click)="split()"
+        [disabled]="!canSplit()"
+      >
+        Split
+      </button>
+    </div>
+  </div>
+
+  @if (roundResult()) {
+  <div class="col-12">
+    <div
+      [class]="'alert ' + (roundResult()!.won ? 'alert-success' : 'alert-danger')"
+    >
+      {{ roundResult()!.message }}
+    </div>
+  </div>
+  }
+  }
 </div>
