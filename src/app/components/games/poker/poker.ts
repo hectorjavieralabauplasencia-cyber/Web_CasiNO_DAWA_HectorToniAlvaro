@@ -232,6 +232,15 @@ export class Poker {
 
     round.roundPhase = 'finished';
     this.gameRound.set({ ...round });
+
+    // Allow replay after showing results
+    setTimeout(() => {
+      this.gameRound.set(null);
+      this.playerHand.set([]);
+      this.statusMessage.set('Presiona Jugar para comenzar una ronda de Texas Hold\'em.');
+      this.roundHistory.set([]);
+      this.lastWinner.set('');
+    }, 5000);
   }
 
   private findBestFiveCards(cards: PlayingCard[]): PlayingCard[] {
