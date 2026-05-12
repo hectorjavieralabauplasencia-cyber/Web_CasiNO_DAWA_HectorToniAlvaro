@@ -47,13 +47,15 @@
           <div class="d-flex gap-2 flex-wrap">
             @for (card of gameRound()!.communityCards; track $index) {
             <div class="poker-card">
-              {{ card.rank }}<span class="ms-1">{{ card.suit }}</span>
+              <img [src]="getCardImage(card)" [alt]="card.rank + ' de ' + card.suit" class="card-image" />
             </div>
             }
             @if (gameRound()!.communityCards.length < 5) {
             @for (i of [1, 2, 3]; track i) {
             @if (i > gameRound()!.communityCards.length) {
-            <div class="poker-card poker-card-hidden">?</div>
+            <div class="poker-card poker-card-hidden">
+              <img src="https://deckofcardsapi.com/static/img/back.png" alt="Carta oculta" class="card-image" />
+            </div>
             }
             }
             }
@@ -101,7 +103,7 @@
       <div class="d-flex gap-2">
         @for (card of playerHand(); track $index) {
         <div class="poker-card poker-card-player">
-          {{ card.rank }}<span class="ms-1">{{ card.suit }}</span>
+          <img [src]="getCardImage(card)" [alt]="card.rank + ' de ' + card.suit" class="card-image" />
         </div>
         }
       </div>

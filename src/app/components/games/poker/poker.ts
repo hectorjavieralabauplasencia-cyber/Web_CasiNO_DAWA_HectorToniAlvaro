@@ -44,6 +44,17 @@ export class Poker {
 
   private currentBet: BetSlip | null = null;
 
+  getCardImage(card: PlayingCard): string {
+    const suitMap: { [key: string]: string } = {
+      '♠': 'S',
+      '♥': 'H',
+      '♦': 'D',
+      '♣': 'C'
+    };
+    const suit = suitMap[card.suit] || card.suit;
+    return `https://deckofcardsapi.com/static/img/${card.rank}${suit}.png`;
+  }
+
   playRound(): void {
     const amount = this.betAmount();
     const bet = this.bettingService.placeBet('Poker Texas Hold\'em', amount, 'Apuesta de mesa');

@@ -42,13 +42,11 @@
           </div>
           <div class="d-flex gap-2 flex-wrap">
             @for (card of dealerCards(); track $index) {
-            <div
-              [class]="'blackjack-card ' + (dealerCardHidden() && $index === dealerCards().length - 1 ? 'card-hidden' : '')"
-            >
+            <div class="blackjack-card">
               @if (dealerCardHidden() && $index === dealerCards().length - 1) {
-              <span class="text-white">?</span>
+              <img src="https://deckofcardsapi.com/static/img/back.png" alt="Carta oculta" class="card-image" />
               } @else {
-              <span>{{ card.rank }}<span class="suit">{{ card.suit }}</span></span>
+              <img [src]="getCardImage(card)" [alt]="card.rank + ' de ' + card.suit" class="card-image" />
               }
             </div>
             }
@@ -73,7 +71,7 @@
           <div class="d-flex gap-2 flex-wrap">
             @for (card of playerCards(); track $index) {
             <div class="blackjack-card">
-              {{ card.rank }}<span class="suit">{{ card.suit }}</span>
+              <img [src]="getCardImage(card)" [alt]="card.rank + ' de ' + card.suit" class="card-image" />
             </div>
             }
           </div>

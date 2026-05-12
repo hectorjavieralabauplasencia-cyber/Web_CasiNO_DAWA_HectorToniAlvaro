@@ -46,6 +46,17 @@ export class Blackjack {
     return this.dealerScore;
   }
 
+  getCardImage(card: PlayingCard): string {
+    const suitMap: { [key: string]: string } = {
+      '♠': 'S',
+      '♥': 'H',
+      '♦': 'D',
+      '♣': 'C'
+    };
+    const suit = suitMap[card.suit] || card.suit;
+    return `https://deckofcardsapi.com/static/img/${card.rank}${suit}.png`;
+  }
+
   deal(): void {
     if (this.roundActive()) {
       return;

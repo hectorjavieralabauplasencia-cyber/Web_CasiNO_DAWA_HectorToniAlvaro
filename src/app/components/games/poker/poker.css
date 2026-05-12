@@ -20,6 +20,13 @@
   text-align: center;
 }
 
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
 .poker-card-hidden {
   background: linear-gradient(135deg, var(--casino-gold), var(--casino-red));
   color: white;

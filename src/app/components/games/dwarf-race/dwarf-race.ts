@@ -92,6 +92,12 @@ export class DwarfRace implements OnDestroy {
       this.statusMessage = won
         ? `Victoria! ${winner.name} gano la carrera.`
         : `No hubo suerte. Gano ${winner.name}.`;
+
+      // Reset for next race
+      setTimeout(() => {
+        this.winnerName = '';
+        this.statusMessage = 'Elige un enano y pulsa correr.';
+      }, 3000);
     }, 220);
   }
 
