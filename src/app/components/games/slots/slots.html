@@ -1,55 +1,113 @@
-<div class="casino-glass rounded-4 p-3 p-lg-4">
-  <div class="api-panel mb-3">
-    <div class="d-flex flex-column flex-lg-row justify-content-between gap-2">
-      <div>
-        <div class="text-uppercase small neon-text fw-bold">Playpager API</div>
-        <div class="fw-semibold">{{ selectedGame?.title }}</div>
-        <div class="text-secondary small">
-          {{ selectedGame?.category }} - {{ selectedGame?.mode }}
+<div class="row g-3">
+  <div class="col-12">
+    <div class="casino-glass rounded-4 p-3 p-lg-4">
+      <h3 class="h5 mb-2">Máquina de Tragaperras</h3>
+      <p class="text-secondary mb-0">{{ statusMessage() }}</p>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="casino-glass rounded-4 p-4 slots-machine">
+      <!-- Pantalla de rodillos -->
+      <div class="slots-reels mb-4">
+        @for (reel of reels(); let i = $index; track i) {
+        <div [class]="'reel ' + (isSpinning() ? 'spinning' : '')">
+          <div class="reel-symbol">{{ reel }}</div>
+        </div>
+        }
+      </div>
+
+      <!-- Información de apuesta -->
+      <div class="row g-3 mb-3">
+        <div class="col-6 col-md-4">
+          <div class="stat-mini text-center">
+            <small class="text-secondary d-block">Apuesta</small>
+            <strong>{{ betAmount() }} fichas</strong>
+          </div>
+        </div>
+        <div class="col-6 col-md-4">
+          <div class="stat-mini text-center">
+            <small class="text-secondary d-block">Multiplicador</small>
+            <strong class="text-warning">
+              {{ lastRound()?.multiplier ? 'x' + lastRound()!.multiplier : '-' }}
+            </strong>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="stat-mini text-center">
+            <small class="text-secondary d-block">Pago</small>
+            <strong class="text-success">{{ lastRound()?.payout ?? 0 }}</strong>
+          </div>
         </div>
       </div>
-      <a class="btn btn-neon align-self-lg-center" [href]="selectedGame?.url" target="_blank" rel="noopener">
-        Abrir Playpager
-      </a>
-    </div>
-  </div>
 
-  <div class="row g-3 align-items-end">
-    <div class="col-12 col-md-4">
-      <label class="form-label">Apuesta</label>
-      <input class="form-control" type="number" [(ngModel)]="betAmount" min="10" step="10" />
-    </div>
-    <div class="col-12 col-md-4 d-grid">
-      <button class="btn btn-casino" (click)="spin()">Girar slots</button>
-    </div>
-    <div class="col-12 col-md-4">
-      <span class="badge text-bg-info rounded-pill">3 iguales x5 | 2 iguales x2</span>
-    </div>
-  </div>
-
-  <div class="row g-3 my-3">
-    @for (reel of reels; track $index) {
-      <div class="col-4">
-        <div class="slot-reel display-6 fw-bold">{{ reel }}</div>
+      <!-- Reglas -->
+      <div class="alert alert-info mb-3 py-2">
+        <strong>Reglas:</strong>
+        🍒 3 símbolos iguales = x3-x10 | 2 iguales = x1.5 | Secuencia = x2
       </div>
-    }
+    </div>
   </div>
 
-  <div class="alert casino-alert py-2 mb-0">{{ statusMessage }}</div>
-
-  <div class="row g-2 mt-3">
-    @for (game of playpagerGames; track game.title) {
+  <!-- Controles -->
+  <div class="col-12">
+    <div class="row g-3 align-items-end">
       <div class="col-12 col-md-6">
+        <label class="form-label">Cantidad a apostar</label>
+        <input
+          class="form-control"
+          type="number"
+          [ngModel]="betAmount()"
+          (ngModelChange)="betAmount.set($event)"
+          min="10"
+          step="10"
+          [disabled]="isSpinning()"
+        />
+      </div>
+      <div class="col-12 col-md-6 d-grid">
         <button
-          class="slot-api-card w-100 text-start"
-          [class.active]="selectedGame?.title === game.title"
-          (click)="selectGame(game)"
-          type="button"
+          class="btn btn-casino btn-lg"
+          (click)="spin()"
+          [disabled]="isSpinning()"
         >
-          <span class="fw-semibold d-block">{{ game.title }}</span>
-          <span class="small text-secondary">{{ game.category }} - {{ game.mode }}</span>
+          {{ isSpinning() ? 'Girando...' : 'Girar ahora' }}
         </button>
       </div>
-    }
+    </div>
   </div>
+
+  <!-- Último resultado -->
+  @if (lastRound()) {
+  <div class="col-12">
+    <div
+      [class]="'alert ' + (lastRound()!.won ? 'alert-success' : 'alert-warning')"
+    >
+      <strong>{{ lastRound()!.message }}</strong>
+      @if (lastRound()!.won) {
+      <span class="text-success d-block">+{{ lastRound()!.payout }} fichas</span>
+      }
+    </div>
+  </div>
+  }
+
+  <!-- Historial -->
+  @if (spinHistory().length > 0) {
+  <div class="col-12">
+    <div class="casino-glass rounded-4 p-3">
+      <h6 class="text-secondary mb-2">Últimas tiradas</h6>
+      <div class="vstack gap-2" style="max-height: 200px; overflow-y: auto">
+        @for (round of spinHistory(); track $index) {
+        <div class="d-flex justify-content-between align-items-center small py-1 border-bottom">
+          <span>{{ round.reels.join(' | ') }}</span>
+          <span
+            [class]="'badge ' + (round.won ? 'bg-success' : 'bg-secondary')"
+          >
+            {{ round.multiplier > 0 ? '+' + round.payout : 'Pérdida' }}
+          </span>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+  }
 </div>

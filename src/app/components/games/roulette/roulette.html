@@ -1,85 +1,181 @@
 <div class="row g-3">
-  <div class="col-12 col-lg-5">
-    <div class="casino-glass rounded-4 p-3 h-100">
-      <h3 class="h5 mb-3">Apuesta de ruleta</h3>
+  <!-- Controles de apuesta -->
+  <div class="col-12 col-lg-4">
+    <div class="casino-glass rounded-4 p-3 p-lg-4 h-100">
+      <h3 class="h5 mb-3">Apuesta de Ruleta</h3>
 
       <div class="mb-3">
         <label class="form-label">Cantidad (fichas)</label>
-        <input class="form-control" type="number" [(ngModel)]="betAmount" min="10" step="10" />
+        <input
+          class="form-control"
+          type="number"
+          [ngModel]="betAmount()"
+          (ngModelChange)="betAmount.set($event)"
+          min="10"
+          step="10"
+          [disabled]="isSpinning()"
+        />
       </div>
 
       <div class="mb-3">
-        <label class="form-label">Tipo</label>
-        <select class="form-select" [(ngModel)]="betType">
+        <label class="form-label">Tipo de apuesta</label>
+        <select
+          class="form-select"
+          [ngModel]="betType()"
+          (ngModelChange)="betType.set($event)"
+          [disabled]="isSpinning()"
+        >
           <option value="color">Color (x2)</option>
-          <option value="number">Numero exacto (x36)</option>
+          <option value="number">Número exacto (x36)</option>
         </select>
       </div>
 
-      @if (betType === 'color') {
-        <div class="mb-3">
-          <label class="form-label">Color objetivo</label>
-          <select class="form-select" [(ngModel)]="selectedColor">
-            <option value="red">Rojo</option>
-            <option value="black">Negro</option>
-          </select>
+      @if (betType() === 'color') {
+      <div class="mb-3">
+        <label class="form-label">Color objetivo</label>
+        <div class="d-flex gap-2">
+          <button
+            class="btn flex-grow-1"
+            [class]="selectedColor() === 'red' ? 'btn-danger' : 'btn-outline-danger'"
+            (click)="selectedColor.set('red')"
+            [disabled]="isSpinning()"
+          >
+            🔴 Rojo
+          </button>
+          <button
+            class="btn flex-grow-1"
+            [class]="selectedColor() === 'black' ? 'btn-dark' : 'btn-outline-light'"
+            (click)="selectedColor.set('black')"
+            [disabled]="isSpinning()"
+          >
+            ⚫ Negro
+          </button>
         </div>
+      </div>
       } @else {
-        <div class="mb-3">
-          <label class="form-label">Numero (0-36)</label>
-          <input class="form-control" type="number" [(ngModel)]="selectedNumber" min="0" max="36" />
-        </div>
+      <div class="mb-3">
+        <label class="form-label">Número (0-36)</label>
+        <input
+          class="form-control"
+          type="number"
+          [ngModel]="selectedNumber()"
+          (ngModelChange)="selectedNumber.set($event)"
+          min="0"
+          max="36"
+          [disabled]="isSpinning()"
+        />
+      </div>
       }
 
-      <button class="btn btn-casino w-100" (click)="spin()">Girar ruleta</button>
+      <button
+        class="btn btn-casino btn-lg w-100"
+        (click)="spin()"
+        [disabled]="isSpinning()"
+      >
+        {{ isSpinning() ? '⏳ Girando...' : '🎰 Girar Ruleta' }}
+      </button>
     </div>
   </div>
 
-  <div class="col-12 col-lg-7">
-    <div class="casino-glass rounded-4 p-3 h-100">
-      <div class="row g-3 mb-3">
-        <div class="col-12 col-md-4">
+  <!-- Ruleta Visual -->
+  <div class="col-12 col-lg-8">
+    <div class="casino-glass rounded-4 p-4 roulette-container">
+      <div class="roulette-wheel-wrapper">
+        <div
+          class="roulette-wheel"
+          [style.transform]="'rotate(' + wheelRotation() + 'deg)'"
+        >
+          @for (num of rouletteNumbers; track num) {
+          <div class="roulette-number" [class]="'num-' + getNumberColor(num)">
+            {{ num }}
+          </div>
+          }
+        </div>
+
+        <!-- Indicador de resultado -->
+        <div class="roulette-indicator"></div>
+      </div>
+
+      <!-- Información del resultado -->
+      <div class="row g-2 mt-4">
+        <div class="col-6 col-md-4">
           <div class="stat-mini text-center">
-            <small class="text-secondary d-block">Ultimo numero</small>
-            <strong class="fs-4">{{ lastSpin ? lastSpin.spin : '--' }}</strong>
+            <small class="text-secondary d-block">Último número</small>
+            <strong class="fs-4">{{ lastSpin()?.spin ?? '--' }}</strong>
           </div>
         </div>
-        <div class="col-12 col-md-4">
+        <div class="col-6 col-md-4">
           <div class="stat-mini text-center">
             <small class="text-secondary d-block">Color</small>
-            <strong class="text-capitalize">{{ lastSpin ? lastSpin.color : '--' }}</strong>
+            <strong>
+              @if (lastSpin()?.color === 'red') {
+              🔴 Rojo
+              } @else if (lastSpin()?.color === 'black') {
+              ⚫ Negro
+              } @else if (lastSpin()?.color === 'green') {
+              🟢 Verde
+              } @else {
+              --
+              }
+            </strong>
           </div>
         </div>
         <div class="col-12 col-md-4">
           <div class="stat-mini text-center">
             <small class="text-secondary d-block">Resultado</small>
-            <strong>{{ lastSpin ? lastSpin.outcome : '--' }}</strong>
+            <strong
+              [class]="lastSpin()?.won ? 'text-success' : 'text-danger'"
+            >
+              {{ lastSpin()?.outcome ?? '--' }}
+            </strong>
           </div>
         </div>
       </div>
 
-      <div class="alert casino-alert py-2">{{ statusMessage }}</div>
+      <div class="alert alert-info mt-3 mb-0 py-2">
+        {{ statusMessage() }}
+      </div>
+    </div>
+  </div>
 
-      <h4 class="h6 text-secondary mt-3">Historial de tiradas</h4>
+  <!-- Historial de tiradas -->
+  <div class="col-12">
+    <div class="casino-glass rounded-4 p-3">
+      <h6 class="text-secondary mb-2">Historial de tiradas</h6>
       <div class="table-responsive">
-        <table class="table table-sm table-striped table-casino align-middle mb-0">
-          <thead>
+        <table class="table table-sm table-striped align-middle mb-0" style="font-size: 0.9rem">
+          <thead class="table-casino">
             <tr>
-              <th>Numero</th>
+              <th>Número</th>
               <th>Color</th>
-              <th>Estado</th>
+              <th>Resultado</th>
             </tr>
           </thead>
           <tbody>
-            @for (round of rounds; track $index) {
-              <tr>
-                <td>{{ round.spin }}</td>
-                <td class="text-capitalize">{{ round.color }}</td>
-                <td>{{ round.outcome }}</td>
-              </tr>
+            @for (round of rounds(); track $index) {
+            <tr>
+              <td><strong>{{ round.spin }}</strong></td>
+              <td>
+                @if (round.color === 'red') {
+                🔴 Rojo
+                } @else if (round.color === 'black') {
+                ⚫ Negro
+                } @else {
+                🟢 Verde
+                }
+              </td>
+              <td
+                [class]="round.won ? 'text-success' : 'text-danger'"
+              >
+                {{ round.outcome }}
+              </td>
+            </tr>
             }
           </tbody>
         </table>
+        @if (rounds().length === 0) {
+        <p class="text-secondary text-center mb-0 py-3">Sin historial aún</p>
+        }
       </div>
     </div>
   </div>

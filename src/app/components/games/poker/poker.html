@@ -1,36 +1,125 @@
-<div class="casino-glass rounded-4 p-3 p-lg-4">
-  <div class="api-panel d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-3">
-    <div>
-      <small class="text-secondary d-block">API Pokerist</small>
-      <strong>Pokerist Texas Hold'em</strong>
-      <p class="mb-0 text-secondary">Accede al poker oficial del ecosistema Pokerist.</p>
+<div class="row g-3">
+  <div class="col-12">
+    <div class="casino-glass rounded-4 p-3 p-lg-4">
+      <div class="row g-2 mb-3">
+        <div class="col-auto">
+          <h3 class="h5 mb-0">Poker Texas Hold'em</h3>
+        </div>
+        <div class="col-auto ms-auto">
+          <span class="badge bg-warning text-dark">{{ gameRound()?.roundPhase | uppercase }}</span>
+        </div>
+      </div>
+      <p class="mb-0 text-secondary">{{ statusMessage() }}</p>
     </div>
-    <a class="btn btn-neon" href="https://www.pokerist.com/" target="_blank" rel="noopener noreferrer">
-      Abrir API
-    </a>
   </div>
 
-  <div class="row g-3 align-items-end mb-3">
-    <div class="col-12 col-md-4">
-      <label class="form-label">Apuesta</label>
-      <input class="form-control" type="number" [(ngModel)]="betAmount" min="10" step="10" />
+  @if (!gameRound()) {
+  <div class="col-12">
+    <div class="casino-glass rounded-4 p-3 p-lg-4">
+      <div class="row g-3">
+        <div class="col-12 col-md-4">
+          <label class="form-label">Apuesta inicial</label>
+          <input
+            class="form-control"
+            type="number"
+            [ngModel]="betAmount()"
+            (ngModelChange)="betAmount.set($event)"
+            min="10"
+            step="10"
+          />
+        </div>
+        <div class="col-12 col-md-8 d-flex align-items-end">
+          <button class="btn btn-casino w-100" (click)="playRound()">
+            Jugar Texas Hold'em
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="col-12 col-md-4 d-grid">
-      <button class="btn btn-casino" (click)="dealHand()">Repartir mano</button>
-    </div>
-    <div class="col-12 col-md-4">
-      <div class="stat-mini text-center">
-        <small class="text-secondary d-block">Evaluacion</small>
-        <strong class="text-warning">{{ handLabel }}</strong>
+  </div>
+  } @else {
+  <div class="col-12">
+    <!-- Mesa de Poker -->
+    <div class="casino-glass rounded-4 p-4 poker-table">
+      <div class="row g-3">
+        <!-- Cartas Comunitarias -->
+        <div class="col-12">
+          <h6 class="text-secondary mb-2">Cartas de la mesa</h6>
+          <div class="d-flex gap-2 flex-wrap">
+            @for (card of gameRound()!.communityCards; track $index) {
+            <div class="poker-card">
+              <img [src]="getCardImage(card)" [alt]="card.rank + ' de ' + card.suit" class="card-image" />
+            </div>
+            }
+            @if (gameRound()!.communityCards.length < 5) {
+            @for (i of [1, 2, 3]; track i) {
+            @if (i > gameRound()!.communityCards.length) {
+            <div class="poker-card poker-card-hidden">
+              <img src="https://deckofcardsapi.com/static/img/back.png" alt="Carta oculta" class="card-image" />
+            </div>
+            }
+            }
+            }
+          </div>
+        </div>
+
+        <!-- Pot -->
+        <div class="col-12">
+          <div class="stat-mini text-center">
+            <small class="text-secondary d-block">Pot actual</small>
+            <strong class="fs-5 text-warning">{{ gameRound()!.pot }} fichas</strong>
+          </div>
+        </div>
+
+        <!-- Bots -->
+        <div class="col-12">
+          <h6 class="text-secondary mb-2">Mesa de jugadores</h6>
+          <div class="row g-2">
+            @for (player of gameRound()!.players; track player.id) {
+            <div class="col-12 col-md-6">
+              <div
+                [class]="'poker-player p-2 rounded ' + (player.id === 'human' ? 'border-warning border-2' : '')"
+              >
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <strong>{{ player.name }}</strong>
+                  @if (player.isFolded) {
+                  <span class="badge bg-danger">FOLD</span>
+                  }
+                </div>
+                <small class="text-secondary d-block">Saldo: {{ player.balance }}</small>
+                <small class="text-secondary d-block">Apuesta: {{ player.currentBet }}</small>
+              </div>
+            </div>
+            }
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="d-flex gap-2 flex-wrap mb-3">
-    @for (card of hand; track $index) {
-      <div class="card-face">{{ card.rank }}{{ card.suit }}</div>
-    }
+  <!-- Mano del Jugador -->
+  <div class="col-12 col-lg-6">
+    <div class="casino-glass rounded-4 p-3">
+      <h6 class="text-secondary mb-2">Tu mano</h6>
+      <div class="d-flex gap-2">
+        @for (card of playerHand(); track $index) {
+        <div class="poker-card poker-card-player">
+          <img [src]="getCardImage(card)" [alt]="card.rank + ' de ' + card.suit" class="card-image" />
+        </div>
+        }
+      </div>
+    </div>
   </div>
 
-  <div class="alert casino-alert py-2 mb-0">{{ statusMessage }}</div>
+  <!-- Historial -->
+  <div class="col-12 col-lg-6">
+    <div class="casino-glass rounded-4 p-3">
+      <h6 class="text-secondary mb-2">Historial</h6>
+      <div class="vstack gap-2" style="max-height: 200px; overflow-y: auto">
+        @for (entry of roundHistory(); track $index) {
+        <small class="text-secondary d-block">{{ entry }}</small>
+        }
+      </div>
+    </div>
+  </div>
+  }
 </div>

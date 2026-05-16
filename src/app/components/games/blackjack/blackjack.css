@@ -1,0 +1,63 @@
+.blackjack-table {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.05), rgba(139, 69, 19, 0.05));
+  border: 2px solid var(--casino-gold);
+  min-height: 350px;
+}
+
+.blackjack-card {
+  width: 80px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #fff, #f0f0f0);
+  border: 2px solid var(--casino-red);
+  border-radius: 6px;
+  font-weight: bold;
+  color: var(--casino-dark);
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.blackjack-card:hover:not(.card-hidden) {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.blackjack-card.card-hidden {
+  background: linear-gradient(135deg, var(--casino-gold), var(--casino-red));
+  color: white;
+  font-weight: bold;
+}
+
+.blackjack-card .suit {
+  font-size: 14px;
+  margin-left: 2px;
+}
+
+@media (max-width: 576px) {
+  .blackjack-card {
+    width: 60px;
+    height: 90px;
+    font-size: 14px;
+  }
+
+  .blackjack-table {
+    padding: 1rem !important;
+  }
+}
+
+.btn-casino:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

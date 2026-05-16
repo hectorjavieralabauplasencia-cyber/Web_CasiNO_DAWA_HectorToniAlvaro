@@ -81,7 +81,7 @@ export class GameLogicService {
     return total;
   }
 
-  evaluatePokerHand(cards: PlayingCard[]): { label: string; multiplier: number } {
+  evaluatePokerHand(cards: PlayingCard[]): { label: string; multiplier: number; rank: number } {
     const values = cards
       .map((card) => this.rankToValue(card.rank))
       .sort((a, b) => a - b);
@@ -96,20 +96,20 @@ export class GameLogicService {
     const flush = suits.every((suit) => suit === suits[0]);
     const straight = this.isStraight(values);
 
-    if (straight && flush) return { label: 'Escalera de color', multiplier: 12 };
-    if (sortedCounts[0] === 4) return { label: 'Poker', multiplier: 10 };
+    if (straight && flush) return { label: 'Escalera de color', multiplier: 12, rank: 9 };
+    if (sortedCounts[0] === 4) return { label: 'Poker', multiplier: 10, rank: 8 };
     if (sortedCounts[0] === 3 && sortedCounts[1] === 2) {
-      return { label: 'Full House', multiplier: 7 };
+      return { label: 'Full House', multiplier: 7, rank: 7 };
     }
-    if (flush) return { label: 'Color', multiplier: 5 };
-    if (straight) return { label: 'Escalera', multiplier: 4 };
-    if (sortedCounts[0] === 3) return { label: 'Trio', multiplier: 3 };
+    if (flush) return { label: 'Color', multiplier: 5, rank: 6 };
+    if (straight) return { label: 'Escalera', multiplier: 4, rank: 5 };
+    if (sortedCounts[0] === 3) return { label: 'Trio', multiplier: 3, rank: 4 };
     if (sortedCounts[0] === 2 && sortedCounts[1] === 2) {
-      return { label: 'Doble pareja', multiplier: 2.5 };
+      return { label: 'Doble pareja', multiplier: 2.5, rank: 3 };
     }
-    if (sortedCounts[0] === 2) return { label: 'Pareja', multiplier: 1.5 };
+    if (sortedCounts[0] === 2) return { label: 'Pareja', multiplier: 1.5, rank: 2 };
 
-    return { label: 'Carta alta', multiplier: 0 };
+    return { label: 'Carta alta', multiplier: 0, rank: 1 };
   }
 
   private rankToValue(rank: string): number {

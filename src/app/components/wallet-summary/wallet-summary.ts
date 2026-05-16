@@ -4,9 +4,10 @@ import { WalletService } from '../../services/wallet.service';
 
 @Component({
   selector: 'app-wallet-summary',
+  standalone: true,
   imports: [],
   templateUrl: './wallet-summary.html',
-  styleUrl: './wallet-summary.css',
+  styleUrls: ['./wallet-summary.css'],
 })
 export class WalletSummary {
   private readonly walletService = inject(WalletService);

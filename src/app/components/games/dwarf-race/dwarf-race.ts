@@ -12,9 +12,10 @@ interface DwarfOption {
 
 @Component({
   selector: 'app-dwarf-race',
+  standalone: true,
   imports: [FormsModule],
   templateUrl: './dwarf-race.html',
-  styleUrl: './dwarf-race.css',
+  styleUrls: ['./dwarf-race.css'],
 })
 export class DwarfRace implements OnDestroy {
   readonly options: DwarfOption[] = [
@@ -91,6 +92,12 @@ export class DwarfRace implements OnDestroy {
       this.statusMessage = won
         ? `Victoria! ${winner.name} gano la carrera.`
         : `No hubo suerte. Gano ${winner.name}.`;
+
+      // Reset for next race
+      setTimeout(() => {
+        this.winnerName = '';
+        this.statusMessage = 'Elige un enano y pulsa correr.';
+      }, 3000);
     }, 220);
   }
 

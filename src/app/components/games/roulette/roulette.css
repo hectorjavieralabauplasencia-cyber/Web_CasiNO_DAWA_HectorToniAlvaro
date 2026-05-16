@@ -1,0 +1,149 @@
+.roulette-container {
+  background: linear-gradient(135deg, rgba(139, 69, 19, 0.1), rgba(76, 175, 80, 0.05));
+  border: 2px solid var(--casino-gold);
+}
+
+.roulette-wheel-wrapper {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.roulette-wheel {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  border: 8px solid var(--casino-gold);
+  background: conic-gradient(
+    from 0deg,
+    #ff4444 0deg 9.73deg,
+    #000 9.73deg 19.46deg,
+    #ff4444 19.46deg 29.19deg,
+    #000 29.19deg 38.92deg,
+    #ff4444 38.92deg 48.65deg,
+    #000 48.65deg 58.38deg,
+    #ff4444 58.38deg 68.11deg,
+    #000 68.11deg 77.84deg,
+    #ff4444 77.84deg 87.57deg,
+    #000 87.57deg 97.30deg,
+    #ff4444 97.30deg 107.03deg,
+    #000 107.03deg 116.76deg,
+    #ff4444 116.76deg 126.49deg,
+    #000 126.49deg 136.22deg,
+    #ff4444 136.22deg 145.95deg,
+    #000 145.95deg 155.68deg,
+    #ff4444 155.68deg 165.41deg,
+    #000 165.41deg 175.14deg,
+    #ff4444 175.14deg 184.87deg,
+    #ff6600 184.87deg 194.60deg,
+    #000 194.60deg 204.33deg,
+    #ff4444 204.33deg 214.06deg,
+    #000 214.06deg 223.79deg,
+    #ff4444 223.79deg 233.52deg,
+    #000 233.52deg 243.25deg,
+    #ff4444 243.25deg 252.98deg,
+    #000 252.98deg 262.71deg,
+    #ff4444 262.71deg 272.44deg,
+    #000 272.44deg 282.17deg,
+    #ff4444 282.17deg 291.90deg,
+    #000 291.90deg 301.63deg,
+    #ff4444 301.63deg 311.36deg,
+    #000 311.36deg 321.09deg,
+    #ff4444 321.09deg 330.82deg,
+    #000 330.82deg 340.55deg,
+    #ff4444 340.55deg 350.28deg,
+    #ff6600 350.28deg 360deg
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 40px rgba(255, 215, 0, 0.3), inset 0 0 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.05s ease;
+}
+
+.roulette-number {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 11px;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.roulette-number.num-red {
+  color: #fff;
+}
+
+.roulette-number.num-black {
+  color: #fff;
+}
+
+.roulette-number.num-green {
+  color: var(--casino-gold);
+  font-weight: bold;
+  font-size: 13px;
+}
+
+/* Indicador en la parte superior */
+.roulette-indicator {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 20px solid var(--casino-gold);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.stat-mini {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.table-casino thead {
+  background: rgba(255, 215, 0, 0.1);
+  border-bottom: 2px solid var(--casino-gold);
+}
+
+.table-casino th {
+  color: var(--casino-gold);
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+@media (max-width: 768px) {
+  .roulette-wheel-wrapper {
+    width: 250px;
+    height: 250px;
+  }
+
+  .roulette-wheel {
+    width: 230px;
+    height: 230px;
+    border-width: 6px;
+  }
+
+  .roulette-number {
+    font-size: 9px;
+  }
+}
