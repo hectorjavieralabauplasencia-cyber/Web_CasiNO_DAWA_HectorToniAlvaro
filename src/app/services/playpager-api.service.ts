@@ -1,12 +1,5 @@
 import { Injectable } from '@angular/core';
-
-export interface PlaypagerGame {
-  title: string;
-  category: 'Slots' | 'Cartas' | 'Mesa';
-  mode: string;
-  url: string;
-  updatedAt?: string;
-}
+import type { PlaypagerGame } from '../common/interfaces';
 
 @Injectable({
   providedIn: 'root',

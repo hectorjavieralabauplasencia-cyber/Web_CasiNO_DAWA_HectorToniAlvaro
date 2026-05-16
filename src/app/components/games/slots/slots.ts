@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import type { PlaypagerGame } from '../../../common/interfaces';
 import { BettingService } from '../../../services/betting.service';
 import { GameLogicService } from '../../../services/game-logic.service';
-import { PlaypagerApiService, type PlaypagerGame } from '../../../services/playpager-api.service';
+import { PlaypagerApiService } from '../../../services/playpager-api.service';
 
 @Component({
   selector: 'app-slots',
