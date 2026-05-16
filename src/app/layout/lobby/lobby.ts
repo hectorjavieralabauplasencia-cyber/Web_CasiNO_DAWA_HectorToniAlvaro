@@ -5,6 +5,7 @@ import { DwarfRace } from '../../components/games/dwarf-race/dwarf-race';
 import { Poker } from '../../components/games/poker/poker';
 import { Roulette } from '../../components/games/roulette/roulette';
 import { Slots } from '../../components/games/slots/slots';
+import { CatalogoProductos } from '../../components/catalogo-productos/catalogo-productos';
 import { MovementLog } from '../../components/movement-log/movement-log';
 import { WalletSummary } from '../../components/wallet-summary/wallet-summary';
 import { AuthService } from '../../services/auth.service';
@@ -23,6 +24,7 @@ type GameId = 'roulette' | 'slots' | 'dwarf-race' | 'blackjack' | 'poker';
     DwarfRace,
     Blackjack,
     Poker,
+    CatalogoProductos,
   ],
   templateUrl: './lobby.html',
   styleUrls: ['./lobby.css'],

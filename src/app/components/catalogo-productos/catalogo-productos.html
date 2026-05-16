@@ -1,0 +1,41 @@
+<section class="catalogo-productos">
+  <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+    <div>
+      <h2 class="h4 mb-1">Catalogo de juegos</h2>
+      <p class="text-secondary mb-0">Datos cargados desde JSON mediante HttpClient.</p>
+    </div>
+    <span class="score-chip">Coleccion</span>
+  </div>
+
+  @if (productos$ | async; as productos) {
+    <div class="row g-3">
+      @for (producto of productos; track producto.title) {
+        <div class="col-12 col-md-6 col-xl-4">
+          <div class="card catalogo-card h-100 border-0 shadow-sm">
+            <img
+              class="card-img-top catalogo-card__image"
+              [src]="producto.image"
+              [alt]="producto.title"
+              loading="lazy"
+            />
+            <div class="card-body d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                <h3 class="h5 card-title mb-0">{{ producto.title }}</h3>
+                <span class="badge text-bg-warning">{{ producto.category }}</span>
+              </div>
+              <p class="card-text text-secondary flex-grow-1">{{ producto.description }}</p>
+              <div class="d-flex justify-content-between align-items-center gap-2 mt-2">
+                <strong class="catalogo-card__price">{{ producto.price }} fichas</strong>
+                <a class="btn btn-casino btn-sm" [href]="producto.url" target="_blank" rel="noopener">
+                  Ver mas
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="alert alert-info mb-0">Cargando catalogo...</div>
+  }
+</section>

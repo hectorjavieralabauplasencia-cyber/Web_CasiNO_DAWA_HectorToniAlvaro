@@ -1,0 +1,21 @@
+.catalogo-productos {
+  color: #f8fafc;
+}
+
+.catalogo-card {
+  background: rgba(15, 23, 42, 0.86);
+  color: #f8fafc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.catalogo-card__image {
+  aspect-ratio: 16 / 9;
+  height: auto;
+  object-fit: cover;
+}
+
+.catalogo-card__price {
+  color: #22c55e;
+  white-space: nowrap;
+}
