@@ -3,6 +3,7 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
 import {
   provideRouter,
   withComponentInputBinding,
@@ -15,6 +16,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
+    provideHttpClient(),
     provideRouter(
       routes,
       withComponentInputBinding(),

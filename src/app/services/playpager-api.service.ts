@@ -1,55 +1,23 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map, type Observable } from 'rxjs';
 import type { PlaypagerGame } from '../common/interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PlaypagerApiService {
-  private readonly games: PlaypagerGame[] = [
-    {
-      title: 'Blackbeard Pirate Slots',
-      category: 'Slots',
-      mode: 'HTML5 gratis, sin registro',
-      url: 'https://playpager.com/free-slots-online/',
-      updatedAt: '2026-04-26',
-    },
-    {
-      title: 'Blackjack',
-      category: 'Cartas',
-      mode: 'Juego de navegador',
-      url: 'https://playpager.com/blackjack/',
-    },
-    {
-      title: 'Roulette',
-      category: 'Mesa',
-      mode: 'Juego de navegador',
-      url: 'https://playpager.com/roulette/',
-    },
-    {
-      title: 'Baccarat',
-      category: 'Mesa',
-      mode: 'Juego de navegador',
-      url: 'https://playpager.com/baccarat/',
-    },
-    {
-      title: 'Craps',
-      category: 'Mesa',
-      mode: 'Juego de navegador',
-      url: 'https://playpager.com/craps/',
-    },
-    {
-      title: '3-Card Poker',
-      category: 'Cartas',
-      mode: 'Juego de navegador',
-      url: 'https://playpager.com/3-card-poker/',
-    },
-  ];
+  private readonly gamesUrl = 'casino-games.json';
 
-  getCasinoGames(): PlaypagerGame[] {
-    return this.games;
+  constructor(private readonly http: HttpClient) {}
+
+  getCasinoGames(): Observable<PlaypagerGame[]> {
+    return this.http.get<PlaypagerGame[]>(this.gamesUrl);
   }
 
-  getFeaturedSlot(): PlaypagerGame {
-    return this.games[0];
+  getFeaturedSlot(): Observable<PlaypagerGame | undefined> {
+    return this.getCasinoGames().pipe(
+      map((games) => games.find((game) => game.category === 'Slots') ?? games[0]),
+    );
   }
 }
