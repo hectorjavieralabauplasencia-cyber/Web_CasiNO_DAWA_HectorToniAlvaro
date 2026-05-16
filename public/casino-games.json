@@ -1,56 +1,98 @@
 [
   {
+    "id": "blackbeard-pirate-slots",
     "title": "Blackbeard Pirate Slots",
     "category": "Slots",
     "mode": "HTML5 gratis, sin registro",
     "image": "https://images.unsplash.com/photo-1596838132731-3301c3fd4317?auto=format&fit=crop&w=900&q=80",
-    "description": "Tragaperras pirata con tiradas rápidas, símbolos clásicos y premios virtuales.",
+    "description": "Tragaperras pirata con tiradas rapidas, simbolos clasicos y premios virtuales.",
+    "details": "Una experiencia de slots pensada para partidas cortas, con tematica pirata y recompensas virtuales por combinaciones de simbolos.",
+    "features": [
+      "Tiradas rapidas",
+      "Premios por combinaciones",
+      "Ideal para probar suerte con fichas virtuales"
+    ],
     "price": 100,
     "url": "https://playpager.com/free-slots-online/",
     "updatedAt": "2026-04-26"
   },
   {
+    "id": "blackjack",
     "title": "Blackjack",
     "category": "Cartas",
     "mode": "Juego de navegador",
     "image": "https://images.unsplash.com/photo-1606167668584-78701c57f13d?auto=format&fit=crop&w=900&q=80",
     "description": "Mesa de cartas para acercarte a 21 sin pasarte y superar a la banca.",
+    "details": "Juego clasico de cartas donde cada decision importa: pedir carta, plantarse y calcular el riesgo frente a la banca.",
+    "features": [
+      "Reglas faciles de aprender",
+      "Partidas estrategicas",
+      "Formato de mesa clasica"
+    ],
     "price": 75,
     "url": "https://playpager.com/blackjack/"
   },
   {
+    "id": "roulette",
     "title": "Roulette",
     "category": "Mesa",
     "mode": "Juego de navegador",
     "image": "https://images.unsplash.com/photo-1606167668913-01d235c370d9?auto=format&fit=crop&w=900&q=80",
-    "description": "Ruleta de casino con apuestas a números, colores y combinaciones.",
+    "description": "Ruleta de casino con apuestas a numeros, colores y combinaciones.",
+    "details": "Mesa de ruleta con apuestas simples y combinadas para seguir cada giro con fichas virtuales.",
+    "features": [
+      "Apuestas a color y numero",
+      "Rondas rapidas",
+      "Experiencia visual de casino"
+    ],
     "price": 50,
     "url": "https://playpager.com/roulette/"
   },
   {
+    "id": "baccarat",
     "title": "Baccarat",
     "category": "Mesa",
     "mode": "Juego de navegador",
     "image": "https://images.unsplash.com/photo-1511193311914-0346f16efe90?auto=format&fit=crop&w=900&q=80",
     "description": "Juego de mesa elegante basado en apostar por jugador, banca o empate.",
+    "details": "Servicio de mesa con ritmo pausado donde eliges el resultado probable antes de revelar la jugada.",
+    "features": [
+      "Apuestas sencillas",
+      "Mesa elegante",
+      "Tres resultados principales"
+    ],
     "price": 80,
     "url": "https://playpager.com/baccarat/"
   },
   {
+    "id": "craps",
     "title": "Craps",
     "category": "Mesa",
     "mode": "Juego de navegador",
     "image": "https://images.unsplash.com/photo-1611996575749-79a3a250f948?auto=format&fit=crop&w=900&q=80",
-    "description": "Dados de casino con rondas dinámicas y múltiples opciones de apuesta.",
+    "description": "Dados de casino con rondas dinamicas y multiples opciones de apuesta.",
+    "details": "Juego de dados con varias opciones de apuesta y resultados rapidos en cada lanzamiento.",
+    "features": [
+      "Juego basado en dados",
+      "Multiples apuestas",
+      "Ritmo dinamico"
+    ],
     "price": 60,
     "url": "https://playpager.com/craps/"
   },
   {
+    "id": "3-card-poker",
     "title": "3-Card Poker",
     "category": "Cartas",
     "mode": "Juego de navegador",
     "image": "https://images.unsplash.com/photo-1541278107931-e006523892df?auto=format&fit=crop&w=900&q=80",
-    "description": "Póker de tres cartas con partidas breves y decisiones directas.",
+    "description": "Poker de tres cartas con partidas breves y decisiones directas.",
+    "details": "Version compacta de poker para comparar manos de tres cartas con decisiones mas directas.",
+    "features": [
+      "Manos de tres cartas",
+      "Partidas breves",
+      "Perfecto para sesiones cortas"
+    ],
     "price": 90,
     "url": "https://playpager.com/3-card-poker/"
   }

@@ -20,4 +20,10 @@ export class PlaypagerApiService {
       map((games) => games.find((game) => game.category === 'Slots') ?? games[0]),
     );
   }
+
+  getCasinoGameById(id: string): Observable<PlaypagerGame | undefined> {
+    return this.getCasinoGames().pipe(
+      map((games) => games.find((game) => game.id === id)),
+    );
+  }
 }

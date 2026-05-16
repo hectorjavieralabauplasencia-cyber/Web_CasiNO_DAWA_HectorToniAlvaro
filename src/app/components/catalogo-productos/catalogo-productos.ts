@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import type { Observable } from 'rxjs';
 import type { PlaypagerGame } from '../../common/interfaces';
 import { PlaypagerApiService } from '../../services/playpager-api.service';
@@ -7,7 +8,7 @@ import { PlaypagerApiService } from '../../services/playpager-api.service';
 @Component({
   selector: 'app-catalogo-productos',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './catalogo-productos.html',
   styleUrls: ['./catalogo-productos.css'],
 })

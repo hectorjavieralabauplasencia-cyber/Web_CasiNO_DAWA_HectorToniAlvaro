@@ -1,4 +1,4 @@
-<section class="catalogo-productos">
+<section id="catalogo" class="catalogo-productos">
   <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
     <div>
       <h2 class="h4 mb-1">Catalogo de juegos</h2>
@@ -9,7 +9,7 @@
 
   @if (productos$ | async; as productos) {
     <div class="row g-3">
-      @for (producto of productos; track producto.title) {
+      @for (producto of productos; track producto.id) {
         <div class="col-12 col-md-6 col-xl-4">
           <div class="card catalogo-card h-100 border-0 shadow-sm">
             <img
@@ -26,7 +26,7 @@
               <p class="card-text text-secondary flex-grow-1">{{ producto.description }}</p>
               <div class="d-flex justify-content-between align-items-center gap-2 mt-2">
                 <strong class="catalogo-card__price">{{ producto.price }} fichas</strong>
-                <a class="btn btn-casino btn-sm" [href]="producto.url" target="_blank" rel="noopener">
+                <a class="btn btn-casino btn-sm" [routerLink]="['/producto', producto.id]">
                   Ver mas
                 </a>
               </div>

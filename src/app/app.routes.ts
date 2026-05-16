@@ -17,6 +17,11 @@ export const routes: Routes = [
     loadComponent: () => import('./layout/lobby/lobby').then((m) => m.Lobby),
   },
   {
+    path: 'producto/:id',
+    canActivate: [authGuard],
+    loadComponent: () => import('./components/producto/producto').then((m) => m.Producto),
+  },
+  {
     path: '**',
     loadComponent: () => import('./not-found/not-found').then((m) => m.NotFound),
   },
