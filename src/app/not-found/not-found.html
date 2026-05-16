@@ -1,5 +1,16 @@
-<div class="not-found-container">
-  <h1>404 - Página No Encontrada</h1>
-  <p>Lo sentimos, la página que buscas no existe.</p>
-  <a routerLink="/">Volver al Inicio</a>
-</div>
+<section class="min-vh-100 casino-bg d-flex align-items-center py-4">
+  <div class="container casino-content">
+    <div class="not-found-panel casino-glass rounded-4 p-4 p-lg-5 text-center mx-auto">
+      <span class="not-found-code d-block">404</span>
+      <h1 class="h2 mb-3">Pagina no encontrada</h1>
+      <p class="text-secondary mb-4">
+        La ruta que intentas abrir no existe o ya no esta disponible.
+      </p>
+
+      <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
+        <a class="btn btn-casino" routerLink="/lobby">Volver al lobby</a>
+        <a class="btn btn-outline-light" routerLink="/">Ir al inicio</a>
+      </div>
+    </div>
+  </div>
+</section>

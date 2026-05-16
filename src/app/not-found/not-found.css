@@ -1,27 +1,11 @@
-.not-found-container {
-  text-align: center;
-  padding: 50px;
+.not-found-panel {
+  max-width: 640px;
+  color: #f8fafc;
 }
 
-.not-found-container h1 {
-  font-size: 3em;
-  color: #ff0000;
-}
-
-.not-found-container p {
-  font-size: 1.2em;
-  margin: 20px 0;
-}
-
-.not-found-container a {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-}
-
-.not-found-container a:hover {
-  background-color: #0056b3;
+.not-found-code {
+  color: #facc15;
+  font-size: clamp(4rem, 14vw, 8rem);
+  font-weight: 800;
+  line-height: 1;
 }
