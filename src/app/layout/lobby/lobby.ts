@@ -1,5 +1,5 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Blackjack } from '../../components/games/blackjack/blackjack';
 import { DwarfRace } from '../../components/games/dwarf-race/dwarf-race';
 import { Poker } from '../../components/games/poker/poker';
@@ -33,9 +33,21 @@ export class Lobby {
   private readonly authService = inject(AuthService);
   private readonly walletService = inject(WalletService);
   private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
 
   readonly activeGame = signal<GameId>('roulette');
   readonly balance = this.walletService.balance;
+
+  private readonly fragmentSubscription = this.route.fragment.subscribe((fragment) => {
+    if (fragment && this.isGameId(fragment)) {
+      this.activeGame.set(fragment as GameId);
+    }
+  });
+
+  private isGameId(value: string): value is GameId {
+    return ['roulette', 'slots', 'dwarf-race', 'blackjack', 'poker'].includes(value);
+  }
+
   readonly gameTitle = computed(() => {
     switch (this.activeGame()) {
       case 'roulette':
