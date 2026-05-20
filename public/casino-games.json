@@ -4,7 +4,7 @@
     "title": "Ruleta",
     "category": "Mesa",
     "mode": "Juego integrado",
-    "image": "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=900&q=80",
+    "image": "https://source.unsplash.com/900x600/?roulette-wheel",
     "description": "Juega a la ruleta del lobby con apuestas en fichas virtuales.",
     "details": "Selecciona la ruleta, apuesta al color, numero o combinaciones y sigue el resultado en tiempo real.",
     "features": [
@@ -20,7 +20,7 @@
     "title": "Slots",
     "category": "Slots",
     "mode": "Juego integrado",
-    "image": "https://images.unsplash.com/photo-1516684778650-4c7ff0d45ebf?auto=format&fit=crop&w=900&q=80",
+    "image": "https://source.unsplash.com/900x600/?slot-machine",
     "description": "Tragaperras del lobby con combinaciones y premio virtual por tiradas.",
     "details": "Gira los rodillos de las slots, intenta obtener tres símbolos iguales y acumula fichas.",
     "features": [
@@ -36,7 +36,7 @@
     "title": "Carreras de enanos",
     "category": "Mesa",
     "mode": "Juego integrado",
-    "image": "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=80",
+    "image": "https://source.unsplash.com/900x600/?race,track",
     "description": "Apuesta en las carreras de enanos y observa quién llega primero.",
     "details": "Sigue la carrera en el lobby y decide en qué corredor invertir tus fichas.",
     "features": [
@@ -52,7 +52,7 @@
     "title": "Blackjack",
     "category": "Cartas",
     "mode": "Juego integrado",
-    "image": "https://images.unsplash.com/photo-1510626176961-4b31f3f0dd43?auto=format&fit=crop&w=900&q=80",
+    "image": "https://source.unsplash.com/900x600/?playing-cards",
     "description": "Mesa de blackjack local para intentar llegar a 21 sin pasarte.",
     "details": "Elige pedir carta o plantarte, compite contra la banca y gana fichas virtuales.",
     "features": [
@@ -68,7 +68,7 @@
     "title": "Poker",
     "category": "Cartas",
     "mode": "Juego integrado",
-    "image": "https://images.unsplash.com/photo-1515812483121-5e801aec0a60?auto=format&fit=crop&w=900&q=80",
+    "image": "https://source.unsplash.com/900x600/?poker-cards",
     "description": "Disfruta del poker del lobby con manos y combinaciones clasicas.",
     "details": "Forma la mejor mano posible y compite con la banca en cada ronda de fichas.",
     "features": [
